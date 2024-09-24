@@ -45,11 +45,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juan0\\source\\repos\\Task3\\Task3\\Task3.csproj",
+      "projectUniqueName": "C:\\Users\\juan0\\OneDrive\\Documents\\itransition\\Task3\\Task3\\Task3.csproj",
       "projectName": "Task3",
-      "projectPath": "C:\\Users\\juan0\\source\\repos\\Task3\\Task3\\Task3.csproj",
+      "projectPath": "C:\\Users\\juan0\\OneDrive\\Documents\\itransition\\Task3\\Task3\\Task3.csproj",
       "packagesPath": "C:\\Users\\juan0\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juan0\\source\\repos\\Task3\\Task3\\obj\\",
+      "outputPath": "C:\\Users\\juan0\\OneDrive\\Documents\\itransition\\Task3\\Task3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\juan0\\AppData\\Roaming\\NuGet\\NuGet.Config",
