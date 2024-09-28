@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UserManagementApp.Business.Interfaces;
+using UserManagementApp.Business.Services;
 using UserManagementApp.Data;
 
 namespace UserManagementApp.Web
@@ -20,9 +22,11 @@ namespace UserManagementApp.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            // Registrar DbContext
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // Registrar IUserService
+            services.AddScoped<IUserService, UserService>(); // Aquí se registra IUserService
 
         }
 

@@ -1,15 +1,44 @@
-﻿<h2>User Management</h2>
+﻿@using UserManagementApp.Data.Models
+@model IEnumerable<User>
+
+
+<h2>User Management</h2>
+
+<!-- Formulario de búsqueda -->
+<form method="get">
+    <input type="text" name="searchString" placeholder="Search users..." />
+    <input type="submit" value="Search" />
+</form>
+
+<!-- Tabla de usuarios -->
 <table class="table">
     <thead>
         <tr>
-            <th>Select</th>
             <th>Name</th>
             <th>Email</th>
             <th>Status</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Loop through users and display here -->
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@(user.IsBlocked ? "Blocked" : "Active")</td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<!-- Paginación -->
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="?page=@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

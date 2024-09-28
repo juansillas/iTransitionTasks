@@ -3,7 +3,16 @@
 }
 
 <div class="text-center">
-    <h1>Welcome to the User Management App</h1>
+    <h1 class="display-4">Welcome to User Management App</h1>
+    <p>Select an option to continue</p>
 
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <!-- Enlace para Iniciar sesión -->
+    <a href="@Url.Action("Login", "Account")" class="btn btn-primary">
+        Log In
+    </a>
+
+    <!-- Enlace para Registrarse -->
+    <a href="@Url.Action("Register", "Account")" class="btn btn-secondary">
+        Sign Up
+    </a>
 </div>

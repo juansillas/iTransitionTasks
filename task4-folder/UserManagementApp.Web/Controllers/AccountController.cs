@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UserManagementApp.Business.Interfaces;
 using UserManagementApp.Web.Models;
 
 namespace UserManagementApp.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IUserService _userService;
+
+        public AccountController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet]
         public IActionResult Login() => View();
 
@@ -13,7 +21,12 @@ namespace UserManagementApp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Authentication logic here
+                var isAuthenticated = _userService.AuthenticateUser(model.Email, model.Password);
+                if (isAuthenticated)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Invalid login attempt.");
             }
             return View(model);
         }
@@ -26,7 +39,17 @@ namespace UserManagementApp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Registration logic here
+                var user = new UserManagementApp.Data.Models.User
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Password = model.Password, // Esto debe ser cifrado en el servicio
+                    RegistrationDate = DateTime.Now,
+                    LastLoginDate = DateTime.Now
+                };
+
+                _userService.RegisterUser(user);
+                return RedirectToAction("Login", "Account");
             }
             return View(model);
         }

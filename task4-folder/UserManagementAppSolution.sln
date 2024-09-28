@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementApp.Web", "UserManagementApp.Web\UserManagementApp.Web.csproj", "{172A3C30-3A3C-45CA-AC6C-BFB611F5309F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementApp.Web", "UserManagementApp.Web\UserManagementApp.Web.csproj", "{172A3C30-3A3C-45CA-AC6C-BFB611F5309F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementApp.Data", "UserManagementApp.Data\UserManagementApp.Data.csproj", "{BA98EDEA-FF43-47EA-B5EE-8997F6EAF356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementApp.Data", "UserManagementApp.Data\UserManagementApp.Data.csproj", "{BA98EDEA-FF43-47EA-B5EE-8997F6EAF356}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementApp.Business", "UserManagementApp.Business\UserManagementApp.Business.csproj", "{15BBD47B-9935-4EC3-BE9B-B80315C682BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementApp.Business", "UserManagementApp.Business\UserManagementApp.Business.csproj", "{15BBD47B-9935-4EC3-BE9B-B80315C682BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementApp.Tests", "UserManagementApp.Tests\UserManagementApp.Tests.csproj", "{1DEAAFA5-E060-408A-8258-98AF74799B6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{15BBD47B-9935-4EC3-BE9B-B80315C682BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15BBD47B-9935-4EC3-BE9B-B80315C682BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15BBD47B-9935-4EC3-BE9B-B80315C682BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DEAAFA5-E060-408A-8258-98AF74799B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DEAAFA5-E060-408A-8258-98AF74799B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DEAAFA5-E060-408A-8258-98AF74799B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DEAAFA5-E060-408A-8258-98AF74799B6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
