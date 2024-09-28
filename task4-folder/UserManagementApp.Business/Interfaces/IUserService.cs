@@ -10,8 +10,10 @@ namespace UserManagementApp.Business.Interfaces
 
         bool AuthenticateUser(string email, string password);
         User GetUserById(int userId);
+        User GetUserByEmail(string email);
 
         void DeleteUser(int userId);
         IQueryable<User> GetAllUsers();
+        List<User> GetAllUsersAsList();
     }
 }

@@ -24,3 +24,10 @@
         @ViewBag.ErrorMessage
     </div>
 }
+
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Any())
+{
+    <div class="alert alert-danger">
+        @ViewData.ModelState[""].Errors.First().ErrorMessage
+    </div>
+}

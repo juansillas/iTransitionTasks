@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,16 @@ namespace UserManagementApp.Web
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Registrar IUserService
             services.AddScoped<IUserService, UserService>(); // Aquí se registra IUserService
+
+            // Configurar la autenticación (usa Identity si lo estás usando)
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login"; // Redirige a esta ruta si no está autenticado
+                });
+
+            services.AddAuthorization(); // Agrega servicios de autorización
+            services.AddControllersWithViews();
 
         }
 

@@ -25,6 +25,6 @@ namespace UserManagementApp.Data.Models
 
         public DateTime RegistrationDate { get; set; }
 
-        public DateTime LastLoginDate { get; set; }
+        public DateTime? LastLoginDate { get; set; }
     }
 }

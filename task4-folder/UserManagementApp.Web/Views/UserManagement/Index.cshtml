@@ -1,44 +1,65 @@
 ﻿@using UserManagementApp.Data.Models
 @model IEnumerable<User>
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 
-<h2>User Management</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Welcome, @User.Identity.Name!</h2>
 
-<!-- Formulario de búsqueda -->
-<form method="get">
-    <input type="text" name="searchString" placeholder="Search users..." />
-    <input type="submit" value="Search" />
-</form>
+    <h2>User Management</h2>
 
-<!-- Tabla de usuarios -->
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
+    <!-- Formulario de búsqueda -->
+    <form method="get">
+        <input type="text" name="searchString" placeholder="Search users..." />
+        <input type="submit" value="Search" />
+    </form>
+
+    <!-- Tabla de usuarios -->
+    <table class="table">
+        <thead>
             <tr>
-                <td>@user.Name</td>
-                <td>@user.Email</td>
-                <td>@(user.IsBlocked ? "Blocked" : "Active")</td>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Fecha de Registro</th>
+                <th>Último Inicio de Sesión</th>
+                <th>Estado</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.RegistrationDate.ToString("dd/MM/yyyy")</td>
+                    <td>@(user.LastLoginDate.HasValue ? user.LastLoginDate.Value.ToString("yyyy-MM-dd") : "Never Logged In")</td>
+                    <td>@(user.IsBlocked ? "Blocked" : "Active")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<!-- Paginación -->
-<nav>
-    <ul class="pagination">
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-        {
-            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
-                <a class="page-link" href="?page=@i">@i</a>
-            </li>
-        }
-    </ul>
-</nav>
+    <!-- Paginación -->
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                    <a class="page-link" href="?page=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
+else
+{
+    <p>Please <a href="/Account/Login">log in</a> to manage users.</p>
+}

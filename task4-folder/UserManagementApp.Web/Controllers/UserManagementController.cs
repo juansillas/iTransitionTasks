@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using UserManagementApp.Business.Interfaces; // Asegúrate de que esto esté presente
-
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using UserManagementApp.Business.Interfaces;
 
 namespace UserManagementApp.Web.Controllers
 {
+    [Authorize]
     public class UserManagementController : Controller
     {
         private readonly IUserService _userService;
@@ -13,9 +14,11 @@ namespace UserManagementApp.Web.Controllers
         {
             _userService = userService;
         }
+
         [HttpGet]
         public IActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
+            // Obtener todos los usuarios para paginación y búsqueda
             var users = _userService.GetAllUsers();
 
             // Aplicar búsqueda si hay un criterio de búsqueda
@@ -27,17 +30,20 @@ namespace UserManagementApp.Web.Controllers
             // Paginación
             var paginatedUsers = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-            // Pasar la lista paginada a la vista
+            // Calcular el total de páginas y pasar a la vista
+            ViewBag.TotalPages = (int)Math.Ceiling(users.Count() / (double)pageSize);
+            ViewBag.CurrentPage = page;
+
             return View(paginatedUsers);
         }
 
         [HttpPost]
         public IActionResult BlockUser(int userId)
         {
-            var user = _userService.GetUserById(userId); // Supongamos que existe este método en IUserService
+            var user = _userService.GetUserById(userId);
             if (user == null)
             {
-                ViewBag.ErrorMessage = "User not found.";
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction("Index");
             }
 
@@ -51,7 +57,7 @@ namespace UserManagementApp.Web.Controllers
             var user = _userService.GetUserById(userId);
             if (user == null)
             {
-                ViewBag.ErrorMessage = "User not found.";
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction("Index");
             }
 
@@ -65,11 +71,11 @@ namespace UserManagementApp.Web.Controllers
             var user = _userService.GetUserById(userId);
             if (user == null)
             {
-                ViewBag.ErrorMessage = "User not found.";
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction("Index");
             }
 
-            _userService.DeleteUser(userId); // Asegúrate de tener este método en IUserService
+            _userService.DeleteUser(userId);
             return RedirectToAction("Index");
         }
     }
